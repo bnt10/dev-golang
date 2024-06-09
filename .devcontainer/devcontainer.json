@@ -1,0 +1,48 @@
+{
+    "name": "Golang Dev Container",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "golang.go",
+                "mhutchie.git-graph",
+                "eamodio.gitlens",
+                "esbenp.prettier-vscode",
+                "ms-azuretools.vscode-docker",
+                "shardulm94.trailing-spaces",
+                "ybaumes.highlight-trailing-white-spaces",
+                "github.vscode-pull-request-github"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "/usr/bin/bash"
+                    }
+                },
+                "go.toolsManagement.autoUpdate": true,
+                "go.lintTool": "golangci-lint",
+                "go.lintFlags": [
+                    "--fast"
+                ],
+                "go.formatTool": "goimports",
+                "editor.formatOnSave": true,
+                "[go]": {
+                    "editor.formatOnSave": true,
+                    "editor.codeActionsOnSave": {
+                        "source.organizeImports": "always",
+                        "source.fixAll": "always"
+                    }
+                }
+            }
+        }
+    },
+    "postCreateCommand": "(if [ ! -f go.mod ]; then go mod init github.com/username/projectname; fi) && go mod tidy",
+    "remoteUser": "vscode",
+    "mounts": [
+        "source=${localWorkspaceFolder}/,target=/workspace,type=bind,consistency=cached"
+    ],
+    "workspaceFolder": "/workspace"
+}
