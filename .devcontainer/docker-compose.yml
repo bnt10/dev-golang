@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  golang:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    env_file:
+      - .env
+
+  db:
+    build:
+      context: ./postpre
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+volumes:
+  postgres-data:

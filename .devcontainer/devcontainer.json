@@ -1,8 +1,8 @@
 {
     "name": "Golang Dev Container",
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "golang",
+    "workspaceFolder": "/workspace",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -35,14 +35,14 @@
                         "source.organizeImports": "always",
                         "source.fixAll": "always"
                     }
-                }
+                },
+                "git.safe.directory": "/workspace"
             }
         }
     },
-    "postCreateCommand": "(if [ ! -f go.mod ]; then go mod init github.com/username/projectname; fi) && go mod tidy",
+    "postCreateCommand": "(if [ ! -f go.mod ]; then go mod init github.com/username/projectname; fi) && go mod tidy && git config --global --add safe.directory /workspace",
     "remoteUser": "vscode",
     "mounts": [
         "source=${localWorkspaceFolder}/,target=/workspace,type=bind,consistency=cached"
-    ],
-    "workspaceFolder": "/workspace"
+    ]
 }

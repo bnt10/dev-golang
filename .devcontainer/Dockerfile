@@ -23,6 +23,12 @@ RUN groupadd -g 1000 vscode \
     && useradd -u 1000 -g vscode -m vscode \
     && echo "vscode ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
+# 작업 디렉토리 소유권 변경
+RUN chown -R vscode:vscode /workspace
+
+# git safe directory 설정
+RUN git config --global --add safe.directory /workspace
+
 # 사용자의 권한 설정
 USER vscode
 
